@@ -86,6 +86,9 @@ function Configure-WinRMHttpsListener
     $WinrmCreate= "winrm create --% winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname=`"$hostName`";CertificateThumbprint=`"$thumbPrint`"}"
     invoke-expression $WinrmCreate
     winrm set winrm/config/service/auth '@{Basic="true"}'
+    
+    #winrm set up for remote management on this computer
+    winrm quickconfig -quiet
 }
 
 function Add-FirewallException
